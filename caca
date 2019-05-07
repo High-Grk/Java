@@ -1,0 +1,300 @@
+
+package funciones;
+
+import java.util.Random;
+
+public class Funciones {
+
+    public static int sumar(int n1, int n2){
+        n2 = n1 + n2;
+        return n2;
+    }
+    
+    public static String imprimir(String a){
+        a = "palabra: "+a;
+        return a;
+    }
+    
+    public static int sumaArreglo(int[] arr){
+        int suma = 0;
+        for(int i=0; i<arr.length; i++){
+            suma+=arr[i];
+        }
+        return suma;
+    }
+    
+    public static void llenarArreglo(int[] arr){
+        Random rnum = new Random();
+        for(int i=0; i<arr.length; i++){
+            arr[i]=rnum.nextInt(10);
+        }
+    }
+    
+    public static void imprimirArreglo(int[] arr){
+        for(int i=0; i<arr.length; i++){
+            System.out.println("[ "+arr[i]+" ]");
+        }
+    }
+    
+    public static void ordenar(int[] arr){
+        int contador = 0;
+        for (int i=0; i<arr.length-1; i++){
+            for (int j=0; j<arr.length-1; j++) {
+                if(arr[j]>arr[j+1]){
+                    int aux = arr[j];
+                    arr[j] = arr[j+1];
+                    arr[j+1] = aux;
+                    contador++;
+                }
+            }
+        }
+        System.out.println(contador);
+    }
+    
+    public static int contarLetras(String[] arr, char letra){
+        int contador = 0;
+        for (int i=0; i<arr.length; i++){
+            for (int j=0; j<arr[i].length(); j++){
+                if(arr[i].charAt(j)==letra){
+                    contador++;
+                }
+            }
+        }
+        return contador;
+    }
+    
+    public static void main(String[] args) {
+        /*
+        int a = 2;
+        int b = 3;
+                
+        b = sumar(a,b);
+        System.out.println(b);
+        */
+        /*
+        String palabra = "";
+        String palabraMod = imprimir(palabra);
+        System.out.println(palabraMod);
+        System.out.println(imprimir("Hola Mundo"));
+        */
+        
+        String[] palabras = {"Pedro", "Paula"};
+        System.out.println(contarLetras(palabras, 'a'));
+        
+        int[] arreglo0 = {1, 2 ,3 ,4 ,5};
+        System.out.println(sumaArreglo(arreglo0));
+        imprimirArreglo(arreglo0);
+        
+        int[] arreglo1 = new int[15];
+        System.out.println(sumaArreglo(arreglo1));
+        imprimirArreglo(arreglo1);
+        
+        llenarArreglo(arreglo1);
+        System.out.println(sumaArreglo(arreglo1));
+        ordenar(arreglo1);
+        imprimirArreglo(arreglo1);
+        
+        
+    }
+    
+}
+
+
+//
+
+
+package funciones;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class Paso {
+    public static Random rnum = new Random();
+    public static Scanner teclado = new Scanner(System.in);
+    
+    public static int sumar(int num1, int num2){
+        num2 = num1+ num2;
+        return num2;
+    }
+    
+    public static int sumaArreglo(int[] arr){
+        
+        int suma=0;
+        for(int i=0;i<arr.length;i++){
+           suma+=arr[i]; 
+        }
+        return suma;
+    }
+    
+    public static void llenarArreglo(int[] arr){
+        for(int i=0;i<arr.length;i++){
+            arr[i]=rnum.nextInt(100);
+        }
+        
+    }public static void llenarArregloSinRepetir(int[] arr, int rango){
+        if(rango < arr.length){
+            rango = arr.length;
+        }
+        
+        boolean bandera = false;
+        int random;
+        
+        for(int i=0;i<arr.length;i++){
+            do{
+                bandera=false;
+                random = rnum.nextInt(rango);
+                for(int j=0;j<=i;j++){
+                    
+                    if(arr[j]==random){
+                        bandera = true;
+                    }
+                }
+                
+            }while(bandera);
+            arr[i] = random;
+        }
+        
+    }
+    
+    
+    public static void imprimirArreglo(int[] arr){
+        for(int i=0;i<arr.length;i++){
+            System.out.print("[ "+arr[i]+"\t]");
+        }
+        System.out.println("");
+    }
+    
+    public static void ordenar(int[] arr){
+        int contador =0;
+        for(int i =0;i<arr.length-1;i++){
+            for(int j = 0;j<arr.length-1;j++){
+                if(arr[j]>arr[j+1]){
+                  int aux = arr[j];
+                  arr[j] = arr[j+1];
+                  arr[j+1] = aux;
+                  contador++;
+                }
+            }
+        }
+        System.out.println(contador);
+    }
+    
+    
+    public static int contarLetras(String[] arr, char letra){
+        int contador =0;
+        for(int i=0;i<arr.length;i++){
+            for(int j=0;j<arr[i].length();j++){
+                if(arr[i].charAt(j)==letra){
+                    contador++;
+                }
+            }
+        }
+        return contador;
+    }
+    
+    public static void imprimirMat(int[][] mat){
+        for(int i=0;i<mat.length;i++){
+            for (int j = 0; j < mat[i].length; j++) {
+                System.out.print("[ "+mat[i][j]+"\t]");
+            }
+            System.out.println("");
+        }
+    }
+    
+    public static void llenarMatriz(int[][] mat, int rango){
+        for (int i = 0; i < mat.length; i++) {
+            for (int j = 0; j < mat[i].length; j++) {
+                mat[i][j]=rnum.nextInt(rango);
+            }
+        }
+    }
+    
+    public static void main(String[] args) {
+       int a = 1;
+       int[] arreglo = {2, 3, 4};
+       int[][] matriz =new int[5][3];
+        imprimirMat(matriz);
+        llenarMatriz(matriz, 100);
+        imprimirMat(matriz);
+        System.out.println("========");
+        for (int i = 0; i < matriz.length; i++) {
+            imprimirArreglo(matriz[i]);
+        }
+        
+       
+       
+    }
+}
+
+//
+
+package ordenararreglo;
+
+import java.util.Random;
+
+public class OrdenarArregloSinRepetir {
+
+    public static void llenarArreglo(int[] arr) {
+        Random rnum = new Random();
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = rnum.nextInt(10);
+        }
+    }
+
+    public static void imprimirArreglo(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            System.out.println("[ " + arr[i] + " ]");
+        }
+    }
+
+    public static void ordenarArreglo(int[] arr) {
+        int contador = 0;
+        for (int i = 0; i < arr.length - 1; i++) {
+            for (int j = 0; j < arr.length - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    int aux = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = aux;
+                    contador++;
+                }
+            }
+        }
+        System.out.println(contador);
+    }
+
+    public static void sinRepetir(int[] arr, int rango) {
+        if (rango < arr.length) {
+            rango = arr.length;
+        }
+
+        Random rnum = new Random();
+        boolean bandera = false;
+
+        for (int i = 0; i < arr.length; i++) {
+            do {
+                bandera = false;
+                int random = rnum.nextInt(rango);
+                for (int j = 0; j <= i; j++) {
+                    if (arr[j] == random) {
+                        bandera = true;
+                    }
+                }
+            } while (bandera);
+            arr[i] = random;
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] arreglo1 = new int[15];
+        sinRepetir(arreglo1);
+        ordenarArreglo(arreglo1);
+        imprimirArreglo(arreglo1);
+
+        
+
+    }
+
+}
+
+
+
