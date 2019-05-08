@@ -1,0 +1,78 @@
+
+import java.util.Random;
+
+public class Matriz2 {
+    
+    public static Random rnum = new Random();
+    
+    public static void main(String[] args) {
+        int dim = 2;
+        int rango = 5;
+        
+        int [][] mat = generarMatriz(dim, rango);
+        mostrarMatriz(mat);
+        int perimetro = sumaPerimetro(mat);
+        System.out.println("El perimetro es: "+perimetro);
+        int centro = centro(mat);
+        System.out.println("El centro de la matriz es: "+ centro);
+        int[] diagonal1 = new int[dim];
+        int[] diagonal2 = new int[dim];
+        generaDiagonal(diagonal1, diagonal2);
+        mostrarArr(diagonal1);
+        mostrarArr(diagonal2);
+        int [][] transpuesta = transpuesta(mat);
+        mostrarMatriz(transpuesta);
+        
+    }
+
+    private static int[][] generarMatriz(int dim, int rango) {
+        int[][] mat = new int[dim][dim];
+        for (int i = 0; i < mat.length; i++) {
+            for (int j = 0; j < mat[i].length; j++) {
+                mat[i][j] = rnum.nextInt(rango);
+            }
+        }
+        return mat;
+    }
+
+    private static int sumaPerimetro(int[][] mat) {
+        int acumulador = 0;
+        for (int i = 0; i < mat.length; i++) {
+            acumulador+=mat[0][i];                  // 1° fila
+            acumulador+=mat[mat.length-1][i];          // Ultima fila
+            acumulador+=mat[i][0];
+            acumulador+=mat[i][mat.length-1];
+        }
+        acumulador-=mat[0][0];
+        acumulador-=mat[mat.length-1][0];          // Ultima fila
+        acumulador-=mat[mat.length-1][mat.length-1];
+        acumulador-=mat[0][mat.length-1];
+    return acumulador;         
+    }
+
+    private static void generaDiagonal(int[] diagonal1, int[] diagonal2) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private static int[][] transpuesta(int[][] mat) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private static int centro(int[][] mat) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private static void mostrarMatriz(int[][] mat) {
+        for(int i=0;i<mat.length;i++){
+            for (int j = 0; j < mat[i].length; j++) {
+                System.out.print("[ "+mat[i][j]+"\t]");
+            }
+            System.out.println("");
+        }
+    }
+
+    private static void mostrarArr(int[] diagonal1) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+}
