@@ -1,0 +1,39 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package arraysinrepetir;
+import java.util.ArrayList;
+import java.util.Random;
+
+/**
+ *
+ * @author dci
+ */
+public class ArraySinRepetir {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        ArrayList<Integer> arreglo = new ArrayList<>();
+        Random rnum = new Random();
+        int num;
+        for (int i = 0; i < 15; i++) {
+            arreglo.add(i, rnum.nextInt(15));
+            do {
+                num=rnum.nextInt(15);
+            } while(arreglo.contains(num));
+            arreglo.set(i, num);
+        }
+        System.out.println(arreglo);
+        verificar(5, arreglo);
+
+    }
+    
+    private static void verificar(int i, ArrayList<Integer> arreglo) {
+        System.out.println(arreglo.contains(i));
+    }
+  
+}
