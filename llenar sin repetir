@@ -37,3 +37,66 @@ public class ArraySinRepetir {
     }
   
 }
+
+
+///////
+
+
+package ejemploarray;
+import java.util.ArrayList;
+import java.util.Random;
+
+public class EjemploArray3 {
+    public static void main(String[] args) {
+        ArrayList<Integer> arreglo = new ArrayList<>();
+        
+        int rango = 15;
+        int largo = 15;
+        llenarArr1(arreglo, rango, largo);
+        System.out.println(arreglo);
+        llenarArr2(arreglo, rango, largo);
+        
+        System.out.println(arreglo);
+        
+//        for (int i = 0; i < 15; i++) {
+//            arreglo.add(rnum.nextInt(15));
+//        }
+
+    }
+
+    private static void llenarArr1(ArrayList<Integer> arreglo, int rango, int largo) {
+        Random rnum = new Random();
+        if(rango<largo){
+            rango=largo;
+        }
+        int num;
+        for (int i = 0; i < largo; i++) {
+            arreglo.add(i,rnum.nextInt(rango));
+            do{
+                num=rnum.nextInt(rango);
+                
+            }while(arreglo.contains(num));
+            arreglo.set(i, num);
+        }
+    }
+
+    private static void llenarArr2(ArrayList<Integer> arreglo, int rango, int largo) {
+        arreglo.clear();
+        Random rnum = new Random();
+        if(rango<largo){
+            rango=largo;
+        }
+        int num;
+        for (int i = 0; i < largo; i++) {
+            num=rnum.nextInt(rango);
+            while(arreglo.contains(num)){
+                num = rnum.nextInt(rango);
+            }
+            arreglo.add(num);
+        }
+        
+        
+    }
+            
+    
+}
