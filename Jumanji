@@ -1,0 +1,96 @@
+/*
+ * entrada: 
+        -lanzamientos
+        -jugadores
+        -largo del tablero
+
+ * proceso:
+        -generar arreglo para jugadores
+        -sumar resultados
+        -contar jugadas
+        -cumplir las instrucciones
+        métodos:
+            -aplicar instrucciones
+            -dados
+            -condiciones para las instrucciones
+
+ * salida: 
+        -termino de juego
+        -detalle de jugadas
+        -avance
+        -reglas
+ */
+
+package jumanji;
+import java.util.Random;
+import java.util.ArrayList;
+
+
+public class Jumanji {
+    
+    public static void main(String[] args) {
+        int nJugadores=3;
+        ArrayList<Integer> jugadores = new ArrayList<>();
+        ArrayList<Integer> jugadas = new ArrayList<>();
+        
+        inicio(jugadas, jugadores, nJugadores);
+        int mayor = 0;
+        int casilla = 27;
+        int ganador = 0;
+        do{
+            for (int i = 0; i < nJugadores; i++) {
+                jugadores.set(i, jugadores.get(i)+lanzarDado());
+                jugadas.set(i, jugadas.get(1)+1);
+                instrucciones(jugadores, i);
+                if (mayor<jugadores.get(i) || jugadores.get(i)==casilla) {
+                    mayor=jugadores.get(i);
+                    ganador = i;
+                    if (mayor>=casilla) {
+                        break;
+                    }
+                }
+            }
+           
+        }while(mayor<casilla);
+        System.out.println("Fin del juego, gano el jugador "+(ganador+1)+" en "+jugadas.get(ganador)+" jugadas.");
+    }
+    
+    public static int lanzarDado(){
+        Random rnum = new Random();
+        return (rnum.nextInt(6)+1+rnum.nextInt(6)+1);
+    }
+
+    private static void inicio(ArrayList<Integer> jugadas, ArrayList<Integer> jugadores, int i) {
+        jugadas.clear();
+        jugadores.clear();
+        for (int j = 0; j < i; j++) {
+            jugadas.add(0);
+            jugadores.add(0);
+        }
+    }
+    
+    private static void instrucciones(ArrayList<Integer> jugadores, int i) {
+        if (jugadores.get(i)==13) {
+            jugadores.set(i, 0);
+        } else if (primo(jugadores.get(i))) {
+            jugadores.set(i, getPrimo(jugadores.get(i)));
+        } else if (jugadores.get(i)%10==0) {
+            jugadores.set(i, jugadores.get(i)+5);
+        } else if (jugadores.get(i)%2==1) {
+            jugadores.set(i, jugadores.get(i)-1);
+        } else if (jugadores.get(i)%2==0) {
+            jugadores.set(i, jugadores.get(i)+1);
+        }
+  
+        
+    }
+
+    private static boolean primo(Integer get) {
+        return false;
+    }
+
+    private static Integer getPrimo(Integer get) {
+        return 3;
+    }
+       
+}
