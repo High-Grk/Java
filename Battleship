@@ -1,0 +1,277 @@
+// codigo profe
+
+package batt;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class Batt {
+
+    public static void main(String[] args) {
+        int dim = 10;
+        int barcos = 10;
+        String[][] jugador1 = inicio(dim);
+        String[][] jugadorPC = inicio(dim);
+        String[][] jugadorPCregistro = inicio(dim);
+        asignarBarcos(jugador1, barcos);
+        asignarBarcos(jugadorPC, barcos);
+        
+        int barcosPC = barcos;
+        int barcosJugador = barcos;
+        
+        do{
+        barcosJugador = jugadaAutomatica(jugador1, barcos);
+        barcosPC = jugadaJugador(jugadorPC, jugadorPCregistro, barcosPC);
+        visualizarJuego(jugador1, jugadorPC, barcosJugador, barcosPC);
+        } while (barcosJugador!=0 && barcosPC!=0);
+        
+        if (barcosJugador==0){
+            System.out.println("JugadorPC gano la partida");
+        } else {
+            System.out.println("Jugador gano la partida");
+        }
+        
+        /*
+        visualizarJuego(jugador1, jugadorPCregistro);
+        jugadaAutomatica(jugador1);
+        jugadaJugador(jugadorPC, jugadorPCregistro);
+        visualizarJuego(jugador1, jugadorPCregistro);
+        */
+    }
+
+    private static String[][] inicio(int num) {
+        String[][] matriz = new String[num][num];
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[i].length; j++) {
+                matriz[i][j] = " ";
+            }
+        }
+        return matriz;
+    }
+
+    private static void visualizar(String[][] tablero) {
+        for (int i = 0; i < tablero.length; i++) {
+            for (int j = 0; j < tablero.length; j++) {
+                System.out.print("[" + tablero[i][j] + "]");
+            }
+            System.out.println("");
+        }
+    }
+
+    private static void asignarBarcos(String[][] tablero, int barcos) {
+        Random rnum = new Random();
+        do {
+            int x = rnum.nextInt(tablero.length);
+            int y = rnum.nextInt(tablero.length);
+            if (!tablero[x][y].equals("°")) {
+                tablero[x][y] = "°";
+                barcos--;
+            }
+        } while (barcos > 0);
+    }
+
+    private static void visualizarJuego(String[][] jugador1, String[][] jugadorPC, int barcosJugador, int barcosPC) {
+        System.out.println("--------------PC--------------"+barcosPC);
+        visualizar(jugadorPC);
+        System.out.println("-----------Jugador------------"+barcosJugador);
+        visualizar(jugador1);
+    }
+
+    private static int jugadaAutomatica(String[][] tablero, int barcos) {
+        Random rnum = new Random();
+        boolean disparo = false;
+        do {
+            int x = rnum.nextInt(tablero.length);
+            int y = rnum.nextInt(tablero.length);
+            if (!tablero[x][y].equals("*") || !tablero[x][y].equals("#")) {
+                if (tablero[x][y].equals("°")) {
+                    tablero[x][y] = "#";
+                    barcos--;
+                } else {
+                    tablero[x][y] = "*";
+                }
+                disparo = true;
+
+            }
+        } while (!disparo);
+        return barcos;
+    }
+
+    private static int jugadaJugador(String[][] jugadorPC, String[][] jugadorPCregistro, int barcos) {
+        boolean disparo = false;
+        do {
+            System.out.println("Ingrese las coordenadas");
+            int x = validar(jugadorPC.length);
+            int y = validar(jugadorPC.length);
+            if (!jugadorPC[x][y].equals("*") || !jugadorPC[x][y].equals("#")) {
+                if (jugadorPC[x][y].equals("°")) {
+                    jugadorPC[x][y] = "#";
+                    jugadorPCregistro[x][y] = "#";
+                    barcos--;
+                } else {
+                    jugadorPC[x][y] = "*";
+                    jugadorPCregistro[x][y] = "*";
+                }
+                disparo = true;
+            }
+        } while (!disparo);
+        return barcos;
+    }
+
+    private static int validar(int length) {
+        Scanner teclado = new Scanner(System.in);
+        int var;
+        do {
+            try {
+                System.out.println("ingresa un numero");
+                var = teclado.nextInt();
+
+            } catch (Exception e) {
+                teclado.next();
+                var=-1;
+            }
+        } while (var < 0 || var > length);
+        return var;
+
+    }
+    
+    private static void juego(){
+        
+    }
+    
+
+}
+
+
+// codigo mio
+/*
+ * Entradas: 
+    -
+    -
+ * Procesos:
+    -crear un juego nuevo
+    -asignar barcos
+    -
+ * Salidas:
+    -detalle de las jugadas
+    -resumen final
+    -tableros (jugador y pc)
+ */
+package battleship;
+import java.util.Random;
+import java.util.Scanner;
+
+public class Battleship {
+
+
+    public static void main(String[] args) {
+        int dim = 10;
+        int barcos = 10;
+        String[][] jugador1 = inicio(dim);
+        String[][] jugadorPC = inicio(dim);
+        String[][] jugadorPCregistro = inicio(dim);
+        asignarBarcos(jugador1, barcos);
+        asignarBarcos(jugadorPC, barcos);
+        
+        visualizarJuego(jugador1, jugadorPCregistro);
+        jugadaAutomatica(jugador1);
+        jugadaJugador(jugadorPC, jugadorPCregistro);
+        visualizarJuego(jugador1, jugadorPCregistro);
+        
+        
+        
+    }
+    
+    public static String[][] inicio(int num){
+        String[][] matriz = new String[num][num];
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[i].length; j++) {
+                matriz[i][j]=" ";
+            }
+        }
+        return matriz;
+    }
+
+    private static void visualizar(String[][] tablero) {
+        for (int i = 0; i < tablero.length; i++) {
+            for (int j = 0; j < tablero[i].length; j++) {
+                System.out.println("[" + tablero[i][j] + "]");
+            }
+            System.out.println("");
+        }
+    }
+
+    private static void asignarBarcos(String[][] tablero, int barcos) {
+        Random rnum = new Random();
+        do {
+            int x = rnum.nextInt(tablero.length);
+            int y = rnum.nextInt(tablero.length);
+            if (!tablero[x][y].equals("°")) {
+                tablero[x][y]="°";  
+                barcos--;
+            } 
+        } while (barcos>0);
+    }
+
+    private static void visualizarJuego(String[][] jugador1, String[][] jugadorPC) {
+        System.out.println("----------PC----------");
+        visualizar(jugadorPC);
+        System.out.println("--------Jugador-------");
+        visualizar(jugador1);
+    }
+
+    private static void jugadaAutomatica(String[][] tablero) {
+        Random rnum = new Random();
+        boolean disparo = false; 
+        do {
+            int x = rnum.nextInt(tablero.length);
+            int y = rnum.nextInt(tablero.length);
+            if (!tablero[x][y].equals("*") || !tablero[x][y].equals("#")) {
+                tablero[x][y]="°";  
+                if (tablero[x][y].equals("°")) {
+                    tablero[x][y]="#";
+                }else{
+                    tablero[x][y]="*";
+                }
+                disparo=true;
+            } 
+        } while (!disparo);
+    }
+
+    private static void jugadaJugador(String[][] jugadorPC, String[][] jugadorPCregistro) {
+        boolean disparo = false; 
+        do {
+            System.out.println("Ingrese la coordenada");
+            int x = validar(jugadorPC.length);
+            int y = validar(jugadorPC.length);
+            if (!jugadorPC[x][y].equals("*") || !jugadorPC[x][y].equals("#")) {
+                if (jugadorPC[x][y].equals("°")) {
+                    jugadorPC[x][y]="#";
+                    jugadorPCregistro[x][y]="#";
+                }else{
+                    jugadorPC[x][y]="*";
+                    jugadorPCregistro[x][y]="*";
+                }
+                disparo=true;
+            } 
+        } while (!disparo);
+    }
+    
+    private static int validar(int length){
+        Scanner teclado = new Scanner(System.in);
+        int var;
+        do{
+            try{
+                System.out.println("Ingresa un numero");  
+                var = teclado.nextInt();
+            }catch(Exception e){
+                teclado.next();
+                var=-1;
+            }
+            
+        }while(var<0 || var>length);
+        return var;
+    }
+    
+    
+}
