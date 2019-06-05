@@ -1,0 +1,55 @@
+
+package objetos;
+
+public class Objetos {
+
+    public static void main(String[] args) {
+       Persona p0 = new Persona("Mario", "Plomero", 300, 5);
+        System.out.println(p0.getNombre());
+        p0.setNombre("Luigi");
+        System.out.println(p0.getNombre());
+    }
+
+    @Override
+    public String toString() {
+        return "Objetos{" + '}';
+    }
+    
+    
+}
+
+//////
+
+
+package objetos;
+
+
+public class Persona {
+    private String nombre;
+    private String oficio;
+    private int sueldo;
+    private int edad;
+    
+    // Constructor
+    
+    public Persona(String nombre, String oficio, int sueldo, int edad){
+        this.nombre = nombre;
+        this.oficio = oficio;
+        this.sueldo = sueldo;
+        this.edad = edad;
+    }
+    
+    // Getter
+    
+    public String getNombre(){
+        return this.nombre;
+    }
+    
+    // Setter
+    
+    public void setNombre(String nombre){
+        this.nombre = nombre;
+    }
+    
+    // 
+}
